@@ -1,0 +1,41 @@
+@charset "utf-8";
+@import "./reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Hi+Melody&display=swap');
+
+/* 여백초기화 */
+* {margin:0;padding:0;box-sizing:border-box;}
+html,body{color:#3d3d3d;font-family:'Noto Sans KR',sans-serif;font-weight:normal;overflow-x:hidden;font-size:12px;}
+a {color:#3d3d3d;text-decoration:none;}
+::selection {background:#3d3d3d;color:#fff;}
+
+.wrap{max-width:750px;margin:0 auto;height:100vh;background:#fff;overflow:hidden;background:lightgoldenrodyellow;}
+.custom_btn {display:block;position:relative;float:left;width:120px;padding:0;margin:10px 0;font-weight:600;text-align:center;line-height:50px;color:#FFF;border-radius:5px;transition:all 0.2s ;background:palevioletred;box-shadow:0px 5px 0px 0px #833c66;font-family:'Hi Melody',sans-serif;font-weight:bold;font-size:20px;}
+.custom_btn:hover {box-shadow:0px 0px 0px 0px #833c66;margin-top:15px;margin-bottom:5px;}
+/* start_area */
+.start_zone{display:none;}
+.start_zone.on{width:90%;height:100vh;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;background:pink;}
+.start_zone .tit{margin-bottom:25px;text-align:center;font-size:32px;font-family:'Hi Melody',sans-serif;font-weight:bold;}
+/* game_zone */
+.game_zone{display:none;}
+.game_zone.on{width:90%;height:100vh;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;}
+.game_zone [class^='round_']{width:100%;}
+.game_zone [class^='round_'] .tit{margin-bottom:15px;text-align:center;font-size:32px;font-family:'Hi Melody',sans-serif;font-weight:bold;}
+/* 배경색 */
+.game_zone .round_1 .slot_box li{background:white;}
+.game_zone .round_1 .slot_box li:nth-of-type(2){background:#feffe0;}
+.game_zone .round_1 .slot_box li:nth-of-type(3){background:#ffe0f9;}
+.game_zone .round_1 .slot_box li:nth-of-type(4){background:#ebe0ff;}
+.game_zone .round_1 .slot_box li:nth-of-type(5){background:#e0ecff}
+/* 머리 */
+/* .game_zone .round_2 .slot_box li{} */
+/* 눈 */
+/* .game_zone .round_3 .slot_box li{} */
+/* 코 */
+/* .game_zone .round_4 .slot_box li{} */
+/* 입 */
+/* .game_zone .round_5 .slot_box li{} */
+.slot_box{width:100%;display:flex;background:lightgoldenrodyellow;border:1px solid #3d3d3d;}
+.slot_box li{width:100%;height:150px;display:flex;justify-content:center;align-items:center;font-size:14px;text-align:center;border-right:1px solid #3d3d3d;}
+.slot_box li:last-of-type{border-right:none;}
+.arrow_area{width:100%;height:50px;background:#fff;}
+.arrow_area span{width:20px;height:50px;background:palevioletred;display:block;margin-top:-15px;}
