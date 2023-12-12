@@ -13,7 +13,7 @@
             <a class="custom_btn">Start</a>
         </div>
         <div class="game_zone">
-            <div class="round_">
+            <div class="round_1">
                 <h3 class="tit">배경색</h3><!--배경색, 머리, 눈, 코, 입, 악세사리-->
                 <ul class="slot_box">
                     <li><span></span></li>
@@ -41,7 +41,7 @@
     const arrow = document.querySelector('.arrow_area span');// 화살표
     const stopArrowBtn = document.querySelector('.game_zone .custom_btn');// Stop 버튼
 
-    const gameRound = document.querySelector('.game_zone .round_');// round
+    let gameRound = document.querySelector('.game_zone .round_1');// round
 
     let roundCount = 1;
 
@@ -50,7 +50,7 @@
     let Arrdirection = 'right';
     let persent = 0;
     let slotMoveInterval;// 화살표 interval
-
+    
     // 화살표 결과
     let resultSlot = [];
 
@@ -85,9 +85,14 @@
 
     stopArrowBtn.addEventListener('click', function (){
         if(buttonAct){
-            stopSlot();
+            stopSlot();// 슬롯 멈추기
+            // round_ 클래스 카운트 변경
+            let currentClass = 'round_' + roundCount.toString();
+            let currentRoundNumber = parseInt(currentClass.split('_')[1]);// 현재 라운드 번호 추출
+            roundCount = currentRoundNumber + 1;// 다음 라운드 번호 계산 및 클래스 업데이트
+            gameRound.classList.replace(currentClass, 'round_' + roundCount.toString())
         }else{
-            reStartSlot();
+            reStartSlot();// 슬롯 다시 시작
         }
     })
     // 화살표 멈추기
