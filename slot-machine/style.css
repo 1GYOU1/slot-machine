@@ -39,3 +39,4 @@ a {color:#3d3d3d;text-decoration:none;}
 .slot_box li:last-of-type{border-right:none;}
 .arrow_area{width:100%;height:50px;background:#fff;}
 .arrow_area span{width:20px;height:50px;background:palevioletred;display:block;margin-top:-15px;}
+.game_zone .preview{width:250px;height:250px;margin:0 auto;background:#ebe0ff;}
