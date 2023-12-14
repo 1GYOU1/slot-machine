@@ -2,41 +2,79 @@
 @import "./reset.css";
 @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Hi+Melody&display=swap');
 
-/* 여백초기화 */
+/* reset */
 * {margin:0;padding:0;box-sizing:border-box;}
 html,body{color:#3d3d3d;font-family:'Noto Sans KR',sans-serif;font-weight:normal;overflow-x:hidden;font-size:12px;}
 a {color:#3d3d3d;text-decoration:none;}
 ::selection {background:#3d3d3d;color:#fff;}
-
-.wrap{max-width:750px;margin:0 auto;height:100vh;background:#fff;overflow:hidden;background:lightgoldenrodyellow;}
+/* common */
+.wrap{max-width:750px;margin:0 auto;height:100vh;background:#fff;overflow:hidden;background:lightgoldenrodyellow;position:relative;}
 .custom_btn {display:block;position:relative;float:left;width:120px;padding:0;margin:10px 0;font-weight:600;text-align:center;line-height:50px;color:#FFF;border-radius:5px;transition:all 0.2s ;background:palevioletred;box-shadow:0px 5px 0px 0px #833c66;font-family:'Hi Melody',sans-serif;font-weight:bold;font-size:20px;}
 .custom_btn:hover {box-shadow:0px 0px 0px 0px #833c66;margin-top:15px;margin-bottom:5px;}
 /* start_area */
 .start_zone{display:none;}
 .start_zone.on{width:90%;height:100vh;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;background:pink;}
 .start_zone .tit{margin-bottom:25px;text-align:center;font-size:32px;font-family:'Hi Melody',sans-serif;font-weight:bold;}
+.start_zone .btn_area{display:flex;flex-direction:column;}
+/* HowTo popup */
+.howto_pop{display:none;}
+.howto_pop.on{position:fixed;top:0;left:0;display:block;width:100%;height:100%;}
+.howto_pop .bg{background:rgba(0,0,0,0.7);width:100%;height:100%;}
+.howto_pop .cont{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:250px;background:#fff;padding:20px;font-family:'Hi Melody',sans-serif;font-weight:bold;font-size:17px;border-radius:15px;line-height:22px;}
+.howto_pop .cont span{color:red;}
+.howto_pop .cont .close{position:absolute;top:10px;right:10px;width:15px;display:block;}
+.howto_pop .cont .close img{width:100%;}
 /* game_zone */
 .game_zone{display:none;}
-.game_zone.on{width:90%;height:100vh;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;}
+.game_zone.on{width:85%;height:100vh;margin:0 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;}
 .game_zone [class^='round_']{width:100%;}
 .game_zone [class^='round_'] .tit{margin-bottom:15px;text-align:center;font-size:32px;font-family:'Hi Melody',sans-serif;font-weight:bold;}
-/* 배경색 */
+/* round_1 배경색 */
 .game_zone .round_1 .slot_box li{background:white;}
 .game_zone .round_1 .slot_box li:nth-of-type(2){background:#feffe0;}
 .game_zone .round_1 .slot_box li:nth-of-type(3){background:#ffe0f9;}
 .game_zone .round_1 .slot_box li:nth-of-type(4){background:#ebe0ff;}
 .game_zone .round_1 .slot_box li:nth-of-type(5){background:#e0ecff}
-/* 머리 */
-/* .game_zone .round_2 .slot_box li{} */
-/* 눈 */
-/* .game_zone .round_3 .slot_box li{} */
-/* 코 */
-/* .game_zone .round_4 .slot_box li{} */
-/* 입 */
-/* .game_zone .round_5 .slot_box li{} */
-.slot_box{width:100%;display:flex;background:lightgoldenrodyellow;border:1px solid #3d3d3d;}
-.slot_box li{width:100%;height:150px;display:flex;justify-content:center;align-items:center;font-size:14px;text-align:center;border-right:1px solid #3d3d3d;}
-.slot_box li:last-of-type{border-right:none;}
-.arrow_area{width:100%;height:50px;background:#fff;}
-.arrow_area span{width:20px;height:50px;background:palevioletred;display:block;margin-top:-15px;}
-.game_zone .preview{width:250px;height:250px;margin:0 auto;background:#ebe0ff;}
+/* round_2 머리 */
+/* 
+.game_zone .round_2 .slot_box li{} 
+.game_zone .round_2 .slot_box li:nth-of-type(2){} 
+.game_zone .round_2 .slot_box li:nth-of-type(3){} 
+.game_zone .round_2 .slot_box li:nth-of-type(4){} 
+.game_zone .round_2 .slot_box li:nth-of-type(5){} 
+*/
+/* round_3 눈 */
+/*
+.game_zone .round_3 .slot_box li{} 
+.game_zone .round_3 .slot_box li:nth-of-type(2){} 
+.game_zone .round_3 .slot_box li:nth-of-type(3){} 
+.game_zone .round_3 .slot_box li:nth-of-type(4){} 
+.game_zone .round_3 .slot_box li:nth-of-type(5){} 
+*/
+/* round_4 코 */
+/* 
+.game_zone .round_4 .slot_box li{} 
+.game_zone .round_4 .slot_box li:nth-of-type(2){} 
+.game_zone .round_4 .slot_box li:nth-of-type(3){} 
+.game_zone .round_4 .slot_box li:nth-of-type(4){} 
+.game_zone .round_4 .slot_box li:nth-of-type(5){}  
+*/
+/* round_5 입 */
+/*
+.game_zone .round_5 .slot_box li{} 
+.game_zone .round_5 .slot_box li:nth-of-type(2){} 
+.game_zone .round_5 .slot_box li:nth-of-type(3){} 
+.game_zone .round_5 .slot_box li:nth-of-type(4){} 
+.game_zone .round_5 .slot_box li:nth-of-type(5){}  
+*/
+
+.game_zone .slot_box{width:100%;display:flex;background:linen;border:1px solid #3d3d3d;overflow:hidden;border-radius:15px;}
+.game_zone .slot_box li{width:100%;height:130px;display:flex;justify-content:center;align-items:center;font-size:14px;text-align:center;border-right:1px solid #3d3d3d;}
+.game_zone .slot_box li:last-of-type{border-right:none;}
+.game_zone .arrow_area{width:100%;height:50px;background:#fff;}
+.game_zone .arrow_area span{width:20px;height:50px;background:palevioletred;display:block;margin-top:-15px;margin-left:-10px;}
+.game_zone .preview{width:250px;height:250px;margin:0 auto;background:#fff;margin-top:30px;border:1px solid #3d3d3d;}
+.game_zone .preview .result_2{display:none;}
+.game_zone .preview .result_3{display:none;}
+.game_zone .preview .result_4{display:none;}
+.game_zone .preview .result_5{display:none;}
