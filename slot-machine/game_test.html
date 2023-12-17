@@ -102,7 +102,7 @@
 
     let gameRound = document.querySelector('.game_zone .round_1');// round
 
-    let priviewDiv = document.querySelectorAll('.game_zone .priview div');//
+    let priviewDiv = document.querySelectorAll('.game_zone .preview > div');//
 
     let roundCount = 1;
 
@@ -183,18 +183,23 @@
             resultArr.push(5);
         }
 
+        // console.log(resultArr.length)
         // 결과 priview show
-        if(resultArr.length > 0){
-            // priviewDiv.forEach(() => {
-
-            // })
-        }
-        console.log(resultArr)
+        priviewDiv.forEach((e, i)=>{
+            console.log(priviewDiv)
+            console.log('i=',i+1)
+            console.log('e=',e)
+            console.log('resultArr.length = ', resultArr.length)
+            // console.log('-------------')
+            if(resultArr.length > 1 && resultArr.length == i+1){//두 번째 라운드 부터 result_2 ~ 5 show         
+                console.log(priviewDiv[i])
+                // e.style.display = 'block';
+            }
+        });
     }
 
     // 화살표 포지션 초기화, 재시작
     function reStartSlot(){
-        roundCount = 1;
         persent = 0;
         resultPersent = 0;
         arrow.style.transform = `translateX(0px)`
