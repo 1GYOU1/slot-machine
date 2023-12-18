@@ -36,6 +36,7 @@
                 <a href="javascript:void(0);" class="custom_btn">Stop</a>
             </div>
             <div class="preview">
+                <div class="result_1"></div>
                 <div class="result_2"></div>
                 <div class="result_3"></div>
                 <div class="result_4"></div>
@@ -45,7 +46,11 @@
         <!-- //게임 화면 -->
         <!-- 결과 화면 -->
         <div class="result_zone">
-            
+            <h2 class="tit">결과</h2>
+            <div class="btn_area">
+                <a class="custom_btn reset_btn">다시하기</a>
+                <a class="custom_btn start_show_btn">처음으로</a>
+            </div>
         </div>
         <!-- //결과 화면 -->
     </div>
@@ -80,13 +85,20 @@
 
             - 멈춘 위치에 따른 선택 결과 값(percent 기준) 저장 (✔)
 
-            - preview 영역에 저장한 선택 값 노출 ( )
+            - preview 영역에 저장한 선택 값 노출 (✔)
 
-            - 처음부터 다시 만들기 버튼 클릭 이벤트
-                ㄴ 값 reset ( )
+        ------------------------------------------------ 수정 필요 - result_5 결과 값 노출하고 넘어가도록
+
+            - 처음부터 다시 하기
+                ㄴ 버튼 클릭 이벤트 생성 (✔)
+                ㄴ 값 reset (✔)
+
+            - 처음 화면으로 돌아가기
+                ㄴ 버튼 클릭 이벤트 생성 (✔)
+                ㄴ 값 reset (✔)
 
         3. 결과 화면
-            - 결과 값에 따른 프로필 이미지 다운로드 기능 ( )
+            - 결과 값에 따른 프로필 이미지 다운로드 기능 (?)
     */
 
     // start_zone
@@ -99,10 +111,14 @@
     const arrowBox = document.querySelector('.arrow_area');// 화살표 박스
     const arrow = document.querySelector('.arrow_area span');// 화살표
     const stopArrowBtn = document.querySelector('.game_zone .custom_btn');// Stop 버튼
+    const priviewDiv = document.querySelectorAll('.game_zone .preview > div');// priview
+
+    // result_zone
+    const resultZone = document.querySelector('.result_zone');
+    const resetBtn = document.querySelector('.result_zone .reset_btn');
+    const startShowBtn = document.querySelector('.result_zone .start_show_btn');
 
     let gameRound = document.querySelector('.game_zone .round_1');// round
-
-    let priviewDiv = document.querySelectorAll('.game_zone .preview > div');//
 
     let roundCount = 1;
 
@@ -117,22 +133,23 @@
     let resultArr = [];
 
     // 게임 시작
-    gameStartBtn.addEventListener('click', function (){
+    gameStartBtn.addEventListener('click', () => {
         startZone.classList.remove('on');
         gameZone.classList.add('on');
-        moveArr();
+        // moveArr();
+        reStartSlot();
     });
     // 게임 방법 팝업 열기
-    howToBtn.addEventListener('click', function (){
+    howToBtn.addEventListener('click', () => {
         howToPopUp.classList.add('on');
     });
     // 게임 방법 팝업 닫기
-    function popUpCloseEvent(){
+    const popUpCloseEvent = () => {
         howToPopUp.classList.remove('on');
     }
 
-    function moveArr() {
-        arrMoveInterval = setInterval(function(){
+    const moveArr = () => {
+        arrMoveInterval = setInterval(() => {
             let arrMovePosition = parseInt(arrowBox.getBoundingClientRect().width)*(persent*0.01);
             // 화살표 방향
             if(Arrdirection == 'right'){
@@ -153,9 +170,17 @@
         }, 1);
     }
 
-    stopArrowBtn.addEventListener('click', function (){
+    stopArrowBtn.addEventListener('click', () => {
         if(buttonAct){
+            if(roundCount == 5){// 수정 필요
+                clearInterval(arrMoveInterval);
+                buttonAct = false;
+                gameZone.classList.remove('on');
+                resultZone.classList.add('on');
+                return false;
+            }
             stopSlot();// 슬롯 멈추기
+
             // round_ 클래스 카운트 변경
             let currentClass = 'round_' + roundCount.toString();
             let currentRoundNumber = parseInt(currentClass.split('_')[1]);// 현재 라운드 번호 추출
@@ -167,9 +192,10 @@
     })
 
     // 화살표 멈추기
-    function stopSlot() {
+    const stopSlot = () => {
         clearInterval(arrMoveInterval);
         buttonAct = false;
+
         // 결과 값 배열로 저장
         if(resultPersent < 20){
             resultArr.push(1);
@@ -183,30 +209,58 @@
             resultArr.push(5);
         }
 
-        // console.log(resultArr.length)
+        // 선택한 요소의 스타일 가져오기
+        let choiceElement = document.querySelector(`.game_zone .round_${roundCount} .slot_box li:nth-of-type(${resultArr[roundCount-1]})`);
+        let choiceStyle = getComputedStyle(choiceElement).background;
+
         // 결과 priview show
         priviewDiv.forEach((e, i)=>{
-            console.log(priviewDiv)
-            console.log('i=',i+1)
-            console.log('e=',e)
-            console.log('resultArr.length = ', resultArr.length)
-            // console.log('-------------')
-            if(resultArr.length > 1 && resultArr.length == i+1){//두 번째 라운드 부터 result_2 ~ 5 show         
-                console.log(priviewDiv[i])
-                // e.style.display = 'block';
+            if(resultArr.length == i+1){
+                priviewDiv[i].style.display = 'block';
+                priviewDiv[i].style.background = choiceStyle;
             }
         });
+
+        // console.log(resultArr)
     }
 
     // 화살표 포지션 초기화, 재시작
-    function reStartSlot(){
+    const reStartSlot = () => {
         persent = 0;
         resultPersent = 0;
-        arrow.style.transform = `translateX(0px)`
+        arrow.style.transform = `translateX(0px)`;
         Arrdirection = 'right';
         moveArr();
         buttonAct = true;
     }
-    </script>
+
+    // 다시하기 - 게임 초기화
+    const resetBtnEvent = () => {
+        resultZone.classList.remove('on');
+        gameZone.classList.add('on');
+        reStartSlot();
+        allResetEvent();
+    }
+
+    const allResetEvent = () => {
+        roundCount = 1;
+        priviewDiv.forEach((e, i) => {
+            e.style.removeProperty('background');
+            e.style.display = 'none';
+        })
+        gameRound.classList.replace('round_5', 'round_1');
+        resultArr = [];
+    }
+
+    // 처음 화면으로
+    const startShowEvent = () => {
+        resultZone.classList.remove('on');
+        startZone.classList.add('on');
+        allResetEvent();
+    }
+
+    resetBtn.addEventListener('click', resetBtnEvent);//게임 다시하기
+    startShowBtn.addEventListener('click', startShowEvent);// 처음 화면으로
+</script>
 </body>
 </html>
