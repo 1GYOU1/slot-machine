@@ -87,7 +87,7 @@
 
             - preview 영역에 저장한 선택 값 노출 (✔)
 
-        ------------------------------------------------ 수정 필요 - result_5 결과 값 노출하고 넘어가도록
+        ------------------------------------------------ 수정 필요 result_5 결과 값 노출하고 넘어가도록
 
             - 처음부터 다시 하기
                 ㄴ 버튼 클릭 이벤트 생성 (✔)
@@ -171,12 +171,15 @@
     }
 
     stopArrowBtn.addEventListener('click', () => {
+        console.log('roundCount = ',roundCount)
         if(buttonAct){
-            if(roundCount == 5){// 수정 필요
+            if(roundCount == 5){
                 clearInterval(arrMoveInterval);
                 buttonAct = false;
-                gameZone.classList.remove('on');
-                resultZone.classList.add('on');
+                setTimeout(() => {
+                    gameZone.classList.remove('on');
+                    resultZone.classList.add('on');
+                }, 1500);
                 return false;
             }
             stopSlot();// 슬롯 멈추기
@@ -220,8 +223,6 @@
                 priviewDiv[i].style.background = choiceStyle;
             }
         });
-
-        // console.log(resultArr)
     }
 
     // 화살표 포지션 초기화, 재시작
@@ -236,9 +237,17 @@
 
     // 다시하기 - 게임 초기화
     const resetBtnEvent = () => {
+        console.log('다시하기 버튼 클릭')
         resultZone.classList.remove('on');
         gameZone.classList.add('on');
         reStartSlot();
+        allResetEvent();
+    }
+
+    // 처음 화면으로
+    const startShowEvent = () => {
+        resultZone.classList.remove('on');
+        startZone.classList.add('on');
         allResetEvent();
     }
 
@@ -250,13 +259,6 @@
         })
         gameRound.classList.replace('round_5', 'round_1');
         resultArr = [];
-    }
-
-    // 처음 화면으로
-    const startShowEvent = () => {
-        resultZone.classList.remove('on');
-        startZone.classList.add('on');
-        allResetEvent();
     }
 
     resetBtn.addEventListener('click', resetBtnEvent);//게임 다시하기
