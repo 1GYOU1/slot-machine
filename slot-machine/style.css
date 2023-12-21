@@ -37,34 +37,34 @@ a {color:#3d3d3d;text-decoration:none;}
 .game_zone .round_1 .slot_box li:nth-of-type(4){background:url('./img/result_1_4.jpg')center/cover;}
 .game_zone .round_1 .slot_box li:nth-of-type(5){background:url('./img/result_1_5.jpg')center/cover;}
 /* round_2 머리 */
-.game_zone .round_2 .slot_box li{background:#000;} 
+.game_zone .round_2 .slot_box li{background:url('./img/slot_item_1_1.png')center/cover;} 
 .game_zone .round_2 .slot_box li:nth-of-type(2){background:#454545;} 
 .game_zone .round_2 .slot_box li:nth-of-type(3){background:#828282;}  
 .game_zone .round_2 .slot_box li:nth-of-type(4){background:#c6c6c6;}  
 .game_zone .round_2 .slot_box li:nth-of-type(5){background:#ffeeee;}
 /* round_3 눈 */
+.game_zone .round_3 .slot_box li{background:url('./img/slot_item_1_2.png')center/cover;}  
+.game_zone .round_3 .slot_box li:nth-of-type(2){background: pink;} 
+.game_zone .round_3 .slot_box li:nth-of-type(3){background: lightcoral;} 
+.game_zone .round_3 .slot_box li:nth-of-type(4){background: pink;} 
+.game_zone .round_3 .slot_box li:nth-of-type(5){background: lightcoral;} 
 /*
-.game_zone .round_3 .slot_box li{} 
-.game_zone .round_3 .slot_box li:nth-of-type(2){} 
-.game_zone .round_3 .slot_box li:nth-of-type(3){} 
-.game_zone .round_3 .slot_box li:nth-of-type(4){} 
-.game_zone .round_3 .slot_box li:nth-of-type(5){} 
 */
 /* round_4 코 */
+.game_zone .round_4 .slot_box li{background:url('./img/slot_item_1_3.png')center/cover;}  
+.game_zone .round_4 .slot_box li:nth-of-type(2){background: pink;} 
+.game_zone .round_4 .slot_box li:nth-of-type(3){background: lightcoral;} 
+.game_zone .round_4 .slot_box li:nth-of-type(4){background: pink;} 
+.game_zone .round_4 .slot_box li:nth-of-type(5){background: lightcoral;}  
 /* 
-.game_zone .round_4 .slot_box li{} 
-.game_zone .round_4 .slot_box li:nth-of-type(2){} 
-.game_zone .round_4 .slot_box li:nth-of-type(3){} 
-.game_zone .round_4 .slot_box li:nth-of-type(4){} 
-.game_zone .round_4 .slot_box li:nth-of-type(5){}  
 */
 /* round_5 입 */
+.game_zone .round_5 .slot_box li{background:url('./img/slot_item_1_4.png')center/cover;}  
+.game_zone .round_5 .slot_box li:nth-of-type(2){background: pink;} 
+.game_zone .round_5 .slot_box li:nth-of-type(3){background: lightcoral;} 
+.game_zone .round_5 .slot_box li:nth-of-type(4){background: pink;} 
+.game_zone .round_5 .slot_box li:nth-of-type(5){background: lightcoral;}  
 /*
-.game_zone .round_5 .slot_box li{} 
-.game_zone .round_5 .slot_box li:nth-of-type(2){} 
-.game_zone .round_5 .slot_box li:nth-of-type(3){} 
-.game_zone .round_5 .slot_box li:nth-of-type(4){} 
-.game_zone .round_5 .slot_box li:nth-of-type(5){}  
 */
 
 .game_zone .slot_box{width:100%;display:flex;background:linen;border:1px solid #3d3d3d;overflow:hidden;border-radius:15px;}
