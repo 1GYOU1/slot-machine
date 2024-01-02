@@ -214,13 +214,13 @@
 
         // 선택한 요소의 스타일 가져오기
         let choiceElement = document.querySelector(`.game_zone .round_${roundCount} .slot_box li:nth-of-type(${resultArr[roundCount-1]})`);
-        let choiceStyle = getComputedStyle(choiceElement).background;
+        let choiceStyle = getComputedStyle(choiceElement).backgroundImage;
 
         // 결과 priview show
         priviewDiv.forEach((e, i)=>{
             if(resultArr.length == i+1){
                 priviewDiv[i].style.display = 'block';
-                priviewDiv[i].style.background = choiceStyle;
+                priviewDiv[i].style.backgroundImage = choiceStyle;
             }
         });
     }
@@ -254,7 +254,7 @@
     const allResetEvent = () => {
         roundCount = 1;
         priviewDiv.forEach((e, i) => {
-            e.style.removeProperty('background');
+            e.style.removeProperty('background-image');
             e.style.display = 'none';
         })
         gameRound.classList.replace('round_5', 'round_1');
