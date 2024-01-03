@@ -10,7 +10,7 @@
     <div class="wrap">
         <!-- 시작 화면 -->
         <div class="start_zone on">
-            <h2 class="tit">프로필 만들기</h2>
+            <h2 class="tit">규의 슬롯머신</h2>
             <div class="btn_area">
                 <a class="custom_btn start_btn">게임 시작</a>
                 <a class="custom_btn howto_btn">게임 방법</a>
@@ -20,20 +20,25 @@
         <!-- 게임 화면 -->
         <div class="game_zone">
             <div class="round_1">
-                <h3 class="tit">배경색</h3><!--배경색, 머리, 눈, 코, 입, 악세사리-->
-                <ul class="slot_box">
-                    <li><span></span></li>
-                    <li><span></span></li>
-                    <li><span></span></li>
-                    <li><span></span></li>
-                    <li><span></span></li>
-                </ul>
+                <h3 class="tit">규의 슬롯머신</h3><!--배경색, 머리, 눈, 코, 입, 악세사리-->
+                <div class="slot_area">
+                    <img class="slot_mask" src="./img/slot_box.png" alt="">
+                    <ul class="slot_box">
+                        <li><span></span></li>
+                        <li><span></span></li>
+                        <li><span></span></li>
+                        <li><span></span></li>
+                        <li><span></span></li>
+                    </ul>
+                    <a class="handle" href="javascript:void(0);">
+                        <img src="./img/handle.png" alt="">
+                    </a>
+                </div>
             </div>  
             <div class="arrow_area">
-                <span></span>
-            </div>
-            <div class="btn_area">
-                <a href="javascript:void(0);" class="custom_btn">Stop</a>
+                <span>
+                    <img src="./img/slot_arrow.png" alt="">
+                </span>
             </div>
             <div class="preview">
                 <div class="result_1"></div>
@@ -46,8 +51,16 @@
         <!-- //게임 화면 -->
         <!-- 결과 화면 -->
         <div class="result_zone">
-            <h2 class="tit">결과</h2>
+            <h2 class="tit">당신의 얼굴은 ?</h2>
+            <div id="capture" class="result_view">
+                <div class="result_1"></div>
+                <div class="result_2"></div>
+                <div class="result_3"></div>
+                <div class="result_4"></div>
+                <div class="result_5"></div>
+            </div>
             <div class="btn_area">
+                <a class="custom_btn capture_btn">저장하기</a>
                 <a class="custom_btn reset_btn">다시하기</a>
                 <a class="custom_btn start_show_btn">처음으로</a>
             </div>
@@ -60,9 +73,8 @@
             <a class="close" href="javascript:popUpCloseEvent();">
                 <img src="./img/btn_cls_black.png" alt="">
             </a>
-            게임 방법 팝업
-            <br>어쩌구 저쩌구 입니다 !
-            <br>블라블라.....
+            게임 시작을 누른 후 
+            <br> stop 버튼을 눌러서 캐릭터를 만들어주세요 !
             <br>
             <br><span>※ 본 게임은 PC chrome 브라우저에 최적화 되어있습니다.</span>
         </div>
@@ -87,7 +99,13 @@
 
             - preview 영역에 저장한 선택 값 노출 (✔)
 
-        ------------------------------------------------ 수정 필요 result_5 결과 값 노출하고 넘어가도록
+        ------------------------------------------------
+
+        3. 결과 화면
+            - 결과 노출 (✔)
+
+            - 결과 저장 하기
+                ㄴ 원하는 부분만 캡처 후 저장 (✔)
 
             - 처음부터 다시 하기
                 ㄴ 버튼 클릭 이벤트 생성 (✔)
@@ -96,9 +114,6 @@
             - 처음 화면으로 돌아가기
                 ㄴ 버튼 클릭 이벤트 생성 (✔)
                 ㄴ 값 reset (✔)
-
-        3. 결과 화면
-            - 결과 값에 따른 프로필 이미지 다운로드 기능 (?)
     */
 
     // start_zone
@@ -110,11 +125,12 @@
     const gameZone = document.querySelector('.game_zone');
     const arrowBox = document.querySelector('.arrow_area');// 화살표 박스
     const arrow = document.querySelector('.arrow_area span');// 화살표
-    const stopArrowBtn = document.querySelector('.game_zone .custom_btn');// Stop 버튼
+    const stopArrowBtn = document.querySelector('.game_zone .handle');// Stop 버튼
     const priviewDiv = document.querySelectorAll('.game_zone .preview > div');// priview
 
     // result_zone
     const resultZone = document.querySelector('.result_zone');
+    const resultView = document.querySelectorAll('.result_zone .result_view > div');
     const resetBtn = document.querySelector('.result_zone .reset_btn');
     const startShowBtn = document.querySelector('.result_zone .start_show_btn');
 
@@ -136,7 +152,6 @@
     gameStartBtn.addEventListener('click', () => {
         startZone.classList.remove('on');
         gameZone.classList.add('on');
-        // moveArr();
         reStartSlot();
     });
     // 게임 방법 팝업 열기
@@ -171,26 +186,29 @@
     }
 
     stopArrowBtn.addEventListener('click', () => {
-        console.log('roundCount = ',roundCount)
+        console.log('roundCount = ', roundCount)
         if(buttonAct){
-            if(roundCount == 5){
+            stopSlot();// 슬롯 멈추기
+
+            if(roundCount < 5){
+                setTimeout(() => {
+                    // round_ 클래스 카운트 변경
+                    let currentClass = 'round_' + roundCount.toString();
+                    let currentRoundNumber = parseInt(currentClass.split('_')[1]);// 현재 라운드 번호 추출
+                    roundCount = currentRoundNumber + 1;// 다음 라운드 번호 계산 및 클래스 업데이트
+                    gameRound.classList.replace(currentClass, 'round_' + roundCount.toString())
+
+                    reStartSlot();// 슬롯 다시 시작
+                }, 1000)
+            }else{
                 clearInterval(arrMoveInterval);
                 buttonAct = false;
-                setTimeout(() => {
+                setTimeout(() => {// 결과 화면 show
                     gameZone.classList.remove('on');
                     resultZone.classList.add('on');
                 }, 1500);
                 return false;
             }
-            stopSlot();// 슬롯 멈추기
-
-            // round_ 클래스 카운트 변경
-            let currentClass = 'round_' + roundCount.toString();
-            let currentRoundNumber = parseInt(currentClass.split('_')[1]);// 현재 라운드 번호 추출
-            roundCount = currentRoundNumber + 1;// 다음 라운드 번호 계산 및 클래스 업데이트
-            gameRound.classList.replace(currentClass, 'round_' + roundCount.toString())
-        }else{
-            reStartSlot();// 슬롯 다시 시작
         }
     })
 
@@ -220,7 +238,8 @@
         priviewDiv.forEach((e, i)=>{
             if(resultArr.length == i+1){
                 priviewDiv[i].style.display = 'block';
-                priviewDiv[i].style.backgroundImage = choiceStyle;
+                priviewDiv[i].style.backgroundImage = choiceStyle;// 게임 진행 preview 화면에 background-image 넣어주기 
+                resultView[i].style.backgroundImage = choiceStyle;// 결과 화면에도 background-image 넣어주기 
             }
         });
     }
@@ -263,6 +282,19 @@
 
     resetBtn.addEventListener('click', resetBtnEvent);//게임 다시하기
     startShowBtn.addEventListener('click', startShowEvent);// 처음 화면으로
+
+// 화면 캡처
+document.querySelector('.capture_btn').addEventListener('click', () => {
+    html2canvas(document.querySelector('#capture')).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'myFace.png';
+        link.click();
+    });
+});
+
 </script>
+<!-- 화면 캡처 라이브러리 https://html2canvas.hertzen.com -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>
 </html>
