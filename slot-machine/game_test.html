@@ -10,59 +10,67 @@
     <div class="wrap">
         <!-- 시작 화면 -->
         <div class="start_zone on">
-            <h2 class="tit">규의 슬롯머신</h2>
-            <div class="btn_area">
-                <a class="custom_btn start_btn">게임 시작</a>
-                <a class="custom_btn howto_btn">게임 방법</a>
+            <div class="inner">
+                <h2 class="tit">규의 슬롯머신</h2>
+                <div class="btn_area">
+                    <a class="custom_btn start_btn">게임 시작</a>
+                    <a class="custom_btn howto_btn">게임 방법</a>
+                </div>
             </div>
         </div>
         <!-- //시작 화면 -->
         <!-- 게임 화면 -->
         <div class="game_zone">
-            <div class="round_1">
-                <h3 class="tit">규의 슬롯머신</h3><!--배경색, 머리, 눈, 코, 입, 악세사리-->
-                <div class="slot_area">
-                    <img class="slot_mask" src="./img/slot_box.png" alt="">
-                    <ul class="slot_box">
-                        <li><span></span></li>
-                        <li><span></span></li>
-                        <li><span></span></li>
-                        <li><span></span></li>
-                        <li><span></span></li>
-                    </ul>
-                    <a class="handle" href="javascript:void(0);">
-                        <img src="./img/handle.png" alt="">
-                    </a>
+            <div class="inner">
+                <div class="round_1">
+                    <h3 class="tit">규의 슬롯머신</h3><!--배경색, 머리, 눈, 코, 입, 악세사리-->
+                    <div class="slot_area">
+                        <img class="slot_mask" src="./img/slot_box.png" alt="슬롯 머신">
+                        <ul class="slot_box">
+                            <li><span></span></li>
+                            <li><span></span></li>
+                            <li><span></span></li>
+                            <li><span></span></li>
+                            <li><span></span></li>
+                        </ul>
+                        <a class="handle" href="javascript:void(0);">
+                            <img src="./img/handle.png" alt="슬롯 핸들">
+                        </a>
+                    </div>
+                </div>  
+                <div class="arrow_area">
+                    <span>
+                        <img src="./img/slot_arrow.png" alt="슬롯 화살표">
+                    </span>
                 </div>
-            </div>  
-            <div class="arrow_area">
-                <span>
-                    <img src="./img/slot_arrow.png" alt="">
-                </span>
-            </div>
-            <div class="preview">
-                <div class="result_1"></div>
-                <div class="result_2"></div>
-                <div class="result_3"></div>
-                <div class="result_4"></div>
-                <div class="result_5"></div>
+                <div class="preview">
+                    <img class="preview_box" src="./img/preview_box.png" alt="슬롯 미리보기">
+                    <div class="result_1"></div>
+                    <div class="result_2"></div>
+                    <div class="result_3"></div>
+                    <div class="result_4"></div>
+                    <div class="result_5"></div>
+                </div>
             </div>
         </div>
         <!-- //게임 화면 -->
         <!-- 결과 화면 -->
         <div class="result_zone">
-            <h2 class="tit">당신의 얼굴은 ?</h2>
-            <div id="capture" class="result_view">
-                <div class="result_1"></div>
-                <div class="result_2"></div>
-                <div class="result_3"></div>
-                <div class="result_4"></div>
-                <div class="result_5"></div>
-            </div>
-            <div class="btn_area">
-                <a class="custom_btn capture_btn">저장하기</a>
-                <a class="custom_btn reset_btn">다시하기</a>
-                <a class="custom_btn start_show_btn">처음으로</a>
+            <img class="curtain" src="./img/result_curtain.png" alt="커튼">
+            <div class="inner">
+                <h2 class="tit">결과는 ?</h2>
+                <div id="capture" class="result_view">
+                    <div class="result_1"></div>
+                    <div class="result_2"></div>
+                    <div class="result_3"></div>
+                    <div class="result_4"></div>
+                    <div class="result_5"></div>
+                </div>
+                <div class="btn_area">
+                    <a class="custom_btn capture_btn">저장하기</a>
+                    <a class="custom_btn reset_btn">다시하기</a>
+                    <a class="custom_btn start_show_btn">처음으로</a>
+                </div>
             </div>
         </div>
         <!-- //결과 화면 -->
@@ -71,10 +79,10 @@
         <div class="bg" onClick="popUpCloseEvent();"></div>
         <div class="cont">
             <a class="close" href="javascript:popUpCloseEvent();">
-                <img src="./img/btn_cls_black.png" alt="">
+                <img src="./img/btn_cls_black.png" alt="닫기">
             </a>
             게임 시작을 누른 후 
-            <br> stop 버튼을 눌러서 캐릭터를 만들어주세요 !
+            <br> 슬롯 핸들을 클릭해서 캐릭터를 만들어주세요 !
             <br>
             <br><span>※ 본 게임은 PC chrome 브라우저에 최적화 되어있습니다.</span>
         </div>
@@ -102,6 +110,9 @@
         ------------------------------------------------
 
         3. 결과 화면
+
+            - 커튼 애니메이션 추가 (✔)
+
             - 결과 노출 (✔)
 
             - 결과 저장 하기
@@ -123,6 +134,7 @@
     const howToPopUp = document.querySelector('.howto_pop');
     // game_zone
     const gameZone = document.querySelector('.game_zone');
+    const slotHandle = document.querySelector('.game_zone .handle');
     const arrowBox = document.querySelector('.arrow_area');// 화살표 박스
     const arrow = document.querySelector('.arrow_area span');// 화살표
     const stopArrowBtn = document.querySelector('.game_zone .handle');// Stop 버튼
@@ -189,7 +201,7 @@
         console.log('roundCount = ', roundCount)
         if(buttonAct){
             stopSlot();// 슬롯 멈추기
-
+            slotHandle.classList.add('on');// 핸들 애니메이션 추가
             if(roundCount < 5){
                 setTimeout(() => {
                     // round_ 클래스 카운트 변경
@@ -199,6 +211,7 @@
                     gameRound.classList.replace(currentClass, 'round_' + roundCount.toString())
 
                     reStartSlot();// 슬롯 다시 시작
+                    slotHandle.classList.remove('on');// 핸들 애니메이션 제거
                 }, 1000)
             }else{
                 clearInterval(arrMoveInterval);
